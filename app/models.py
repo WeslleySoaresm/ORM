@@ -20,3 +20,4 @@ class ClinicaUser(models.Model):
         db_table = 'clinica_user'
         verbose_name = 'Clinica User'
         verbose_name_plural = 'Clinica Users'
+
