@@ -1,23 +1,38 @@
 from django.db import models
 
-# Create your models here.
-class ClinicaUser(models.Model):
-    id_paciente = models.AutoField(primary_key=True)
+class EcommerceUser(models.Model):
+
+    id_user = models.AutoField(primary_key=True, db_column='id_user')
     username = models.CharField(max_length=150, unique=True)
-    cpf = models.CharField(max_length=11, unique=True)
-    data_nascimento = models.DateField()
-    telefone = models.CharField(max_length=20)
     email = models.EmailField(unique=True)
-    endereco = models.TextField()
-   
-    
+    password = models.CharField(max_length=128)
+    role = models.IntegerField(
+        choices=[(1, "Admin"), (2, "User"), (3, "Guest")], default=2
+    )
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
 
     def __str__(self):
         return self.username
 
     class Meta:
-        auto_created = False # Indica que a tabela já existe no banco de dados false faz com que o Django não tente criar a tabela novamente
-        db_table = 'clinica_user'
-        verbose_name = 'Clinica User'
-        verbose_name_plural = 'Clinica Users'
+        managed = False
+        db_table = '"ecommerce"."USER"'
+        verbose_name_plural = "Users"
 
+
+class Category(models.Model):
+    id_category = models.AutoField(primary_key=True, db_column='id_category')
+    name = models.CharField(max_length=100, unique=True)
+    description = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    status = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        db_table = 'category'

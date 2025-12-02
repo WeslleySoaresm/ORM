@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'app'
 ]
 
 MIDDLEWARE = [
@@ -74,8 +75,17 @@ WSGI_APPLICATION = 'adim.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'turma_seg_qui',
+        'USER': 'postgres',
+        'PASSWORD': '101520',
+        'HOST': 'localhost',
+        'PORT': '5432',
+        'OPTIONS': {
+            
+            'options': '-c search_path=ecommerce'
+        }
+
     }
 }
 
